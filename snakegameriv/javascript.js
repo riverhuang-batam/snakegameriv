@@ -93,24 +93,26 @@ document.addEventListener('touchend',function(e){
     distY= touch.pageY- startY
 
     if (Math.abs(distX)>Math.abs(distY)){
-        if(distX > 37 && snake.dx === 0){
+        if(distX > 0 && snake.dx === 0){
             snake.dx = grid;
             snake.dy = 0;
         }
-        else if (distX< 39 &&snake.dx === 0){
+        else if (distX< 0 && snake.dx === 0){
             snake.dx= -grid;
             snake.dy= 0;
         }
-        else if (distY > 38 && snake.dy ===0){
+    } else {
+        if (distY > 0 && snake.dy ===0){
             snake.dy= grid;
             snake.dx= 0;
         }
-        else if ( distY < 40 && snake.dy===0){
+        else if ( distY < 0 && snake.dy===0){
             snake.dy= -grid;
             snake.dx= 0;
         }
     }
-})
+    e.preventDefault();
+},false)
 document.addEventListener('keydown',function(e){
     if(e.which === 37&& snake.dx === 0){ //left
         snake.dx= -grid;
