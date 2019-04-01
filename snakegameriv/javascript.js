@@ -32,19 +32,24 @@ function loop(){
     snake.y += snake.dy;
     if (snake.x < 0){ //tembus tembok
         snake.x= canvas.width - grid;
+        console.log('tembus tembok kiri')
     }
     else if ( snake.x >= canvas.width) {
         snake.x =0;
+        console.log('tembus tembok kanan')
     }
     if (snake.y < 0){
         snake.y = canvas.height - grid;
+        console.log('tembus tembok atas')
     }
     else if (snake.y >= canvas.height){
         snake.y = 0;
+        console.log('tembus tembok bawah')
     }
     snake.cells.unshift({x: snake.x, y: snake.y});  //unshift javasript array menambah 1kotak 
     if (snake.cells.length>snake.maxCells){
         snake.cells.pop();
+        // console.log('snake.cells.pop()');
     }
     context.fillStyle = 'red'; // gambar apple
     context.fillRect(apple.x, apple.y, grid-1, grid-1);
@@ -52,7 +57,7 @@ function loop(){
     context.fillStyle= 'green';
     snake.cells.forEach(function(cell, index){ //gambar ular 
         context.fillRect(cell.x, cell.y, grid-1, grid-1);
-
+        // console.log('context.fillRect(cell.x, cell.y, grid-1, grid-1)')
         if (cell.x === apple.x && cell.y === apple.y){ // tata letak apple
             snake.maxCells++;
 
