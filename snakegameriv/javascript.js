@@ -16,7 +16,7 @@ var apple ={
     y:320
 };
 
-function getRandomInt(min,max){
+function getRandomInt(min,max){   //perandoman tempat apple
     return Math.floor(Math.random()* (max - min)) + min;
 }
 
@@ -30,7 +30,7 @@ function loop(){
     context.clearRect(0,0,canvas.width,canvas.height)
     snake.x += snake.dx;
     snake.y += snake.dy;
-    if (snake.x < 0){
+    if (snake.x < 0){ //tembus tembok
         snake.x= canvas.width - grid;
     }
     else if ( snake.x >= canvas.width) {
@@ -42,22 +42,22 @@ function loop(){
     else if (snake.y >= canvas.height){
         snake.y = 0;
     }
-    snake.cells.unshift({x: snake.x, y: snake.y});
+    snake.cells.unshift({x: snake.x, y: snake.y});  //unshift javasript array menambah 1kotak 
     if (snake.cells.length>snake.maxCells){
         snake.cells.pop();
     }
-    context.fillStyle = 'red';
+    context.fillStyle = 'red'; // gambar apple
     context.fillRect(apple.x, apple.y, grid-1, grid-1);
 
     context.fillStyle= 'green';
-    snake.cells. forEach(function(cell, index){ // gambar apple
+    snake.cells.forEach(function(cell, index){ //gambar ular 
         context.fillRect(cell.x, cell.y, grid-1, grid-1);
 
-        if (cell.x === apple.x && cell.y === apple.y){
+        if (cell.x === apple.x && cell.y === apple.y){ // tata letak apple
             snake.maxCells++;
 
             apple.x = getRandomInt(0,25)*grid; // canvas ukuran 400x400 jadi 25X25 grid
-            apple.y = getRandomInt(0,25)*grid;
+            apple.y = getRandomInt(0,25)*grid; 
         }
 
         for (var i = index + 1;i < snake.cells.length; i++){  //reset game
@@ -114,20 +114,26 @@ document.addEventListener('touchend',function(e){
     e.preventDefault();
 },false)
 document.addEventListener('keydown',function(e){
+    
     if(e.which === 37&& snake.dx === 0){ //left
         snake.dx= -grid;
         snake.dy = 0;
+        console.log('left')
     }
     else if(e.which === 38 && snake.dy === 0){ //up
         snake.dy = -grid;
         snake.dx = 0;
+        console.log('up')
     }
-    else if(e.which === 39 && snake.dx === 0){
+    else if(e.which === 39 && snake.dx === 0){// right
         snake.dx = grid;
         snake.dy = 0;
+        console.log('right')
     }
-    else if (e.which === 40 && snake.dy === 0){
+    else if (e.which === 40 && snake.dy === 0){// down
         snake.dy = grid;
         snake.dx = 0;
+        console.log('down')
+
     }
 }); requestAnimationFrame(loop);
